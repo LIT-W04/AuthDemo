@@ -50,6 +50,7 @@ namespace WebApplication4.Controllers
         [Authorize]
         public ActionResult Secret()
         {
+            bool isLoggedIn = User.Identity.IsAuthenticated;// true/false if user is logged in
             string email = User.Identity.Name; //will always match the first argument in SetAuthCookie
             var db = new UserAuthDb(Properties.Settings.Default.ConStr);
             User user = db.GetByEmail(email);
@@ -61,6 +62,5 @@ namespace WebApplication4.Controllers
             FormsAuthentication.SignOut();
             return Redirect("/");
         }
-
     }
 }
